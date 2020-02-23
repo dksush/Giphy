@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Giphy</string>
+    <string name="menu_title_home">home</string>
+    <string name="menu_title_favorites">favorites</string>
+    <string name="input_home_hint">Search GIPHY</string>
+    <string name="btn_home_search">Search</string>
+</resources>
