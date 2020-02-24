@@ -64,8 +64,8 @@ object NetworkUtil {
         override fun intercept(chain: Interceptor.Chain): Response {
             val mRequest = chain.request()
             val newRequest = mRequest.newBuilder()
-                .addHeader("X-Naver-Client-Id", "Cjj07G06ms2sCWlKWezF")
-                .addHeader("X-Naver-Client-Secret", "4v_hXcCSrz")
+                //.addHeader("X-Naver-Client-Id", "Cjj07G06ms2sCWlKWezF")
+               // .addHeader("X-Naver-Client-Secret", "4v_hXcCSrz")
                 .build()
             return chain.proceed(newRequest)
         }
