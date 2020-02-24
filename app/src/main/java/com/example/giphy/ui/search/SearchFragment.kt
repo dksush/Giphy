@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.giphy.R
 import com.example.giphy.data.model.SearchData
 import com.example.giphy.databinding.FragmentSearchBinding
@@ -27,24 +30,36 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.fragment = this@SearchFragment
         binding.lifecycleOwner = this@SearchFragment
 
+
+        val manager =
+            StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
+        manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         binding.recycle.run {
+
             homeAdapter = HomeAdapter(object : BaseRecyclerAdapter.ItemListener<SearchData> {
                 override fun loadMoreItems(list: List<SearchData>, index: Int) {
-                    offset += 1
+                  //  offset += 1
                     lifecycleScope.launch {
-
                     }
                 }
             })
+           // layoutManager = manager
             adapter = homeAdapter
+//            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                    super.onScrollStateChanged(recyclerView, newState)
+//                    (recyclerView.layoutManager as StaggeredGridLayoutManager?)!!.invalidateSpanAssignments()
+//                }
+//            })
         }
 
 
 
+
         lifecycleScope.launch {
-//            Log.v("dksush", "dkshk")
-//            offset = 0
-//            viewModel.getSearchList(offset)
+            Log.v("dksush", "dkshk")
+            offset = 0
+            viewModel.getSearchList(offset)
 
 
         }
@@ -60,8 +75,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     fun onBtnSearch(view: View){
         Log.v("dksush", "검색버튼")
         lifecycleScope.launch {
-            offset = 0
-            viewModel.getSearchList(offset)
+//            offset = 0
+//            viewModel.getSearchList(offset)
 
         }
 
