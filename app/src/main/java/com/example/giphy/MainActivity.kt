@@ -10,7 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.giphy.databinding.ActivityMainBinding
 import com.example.giphy.ui.favorite.FavoriteFragment
-import com.example.giphy.ui.home.HomeFragment
+import com.example.giphy.ui.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
 
         private val fragmentList =
-            listOf(HomeFragment(), FavoriteFragment())
+            listOf(SearchFragment(), FavoriteFragment())
 
         override fun getItemCount() = fragmentList.size
         override fun createFragment(position: Int) = fragmentList[position] as Fragment

@@ -7,7 +7,10 @@
         <import type="android.view.View" />
         <variable
             name="vm"
-            type="com.example.giphy.ui.home.HomeViewModel" />
+            type="com.example.giphy.ui.search.SearchViewModel" />
+        <variable
+            name="fragment"
+            type="com.example.giphy.ui.search.SearchFragment" />
 
 
     </data>
@@ -39,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:onClick="@{()-> vm.onBtnSearch()}"
+            android:onClick="@{(v)-> fragment.onBtnSearch(v)}"
             android:text="@string/btn_home_search"
             app:layout_constraintBottom_toBottomOf="@id/input_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +61,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_text"
             app:layout_constraintVertical_bias="0.0"
-            setData="@{vm.renderItems}" />
+            setData="@{vm.searchItem}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

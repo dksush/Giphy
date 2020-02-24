@@ -6,7 +6,6 @@ import android.view.View
 import com.example.giphy.R
 import com.example.giphy.databinding.FragmentFavoriteBinding
 import com.example.giphy.ui.base.BaseFragment
-import com.example.giphy.ui.home.HomeFragment
 
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 

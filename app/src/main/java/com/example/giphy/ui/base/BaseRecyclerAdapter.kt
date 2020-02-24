@@ -5,24 +5,40 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(diffCallback: DiffUtil.ItemCallback<T>) :
+abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
+    private val itemListener: ItemListener<T>,
+    diffCallback: DiffUtil.ItemCallback<T>
+) :
     ListAdapter<T, H>(diffCallback) {
 
-    private val items: MutableList<T> = mutableListOf()
+    private val itemList: MutableList<T> = mutableListOf()
 
     override fun onBindViewHolder(holder: H, position: Int) {
-        holder.bind(items[position])
+        holder.bind(itemList[position])
+        if (position == itemCount - 1 && itemCount >= 10) itemListener.loadMoreItems(
+            currentList, itemCount + 1
+        )
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return itemList.size
     }
 
     open fun setData(items: List<T>) {
-        this.items.clear()
-        this.items.addAll(items)
+        this.itemList.clear()
+        this.itemList.addAll(items)
         submitList(items)
 
+    }
+
+    open fun setLoadMoreData(items: List<T>) {
+        this.itemList.addAll(items)
+        notifyDataSetChanged()
+
+    }
+
+    interface ItemListener<T> {
+        fun loadMoreItems(list: List<T>, index: Int)
     }
 }
 
