@@ -1,5 +1,18 @@
 package com.example.giphy.common
 
-const val EXTRA_MEMO_TITLE = "memo_title"
-const val EXTRA_MEMO_DESCRIPTION = "memo_description"
-const val EXTRA_MEMO_INDEX = "memo_db_index"
+
+class StringConst {
+
+    companion object {
+        const val API_KEY: String = "qxWRdEX2K9ZM8SM9De9VLZfruzoe3TVm"
+        const val PREF_KEY = "pref_key"
+        const val PREF_KEY_MOVIE = "movie"
+        const val PREF_KEY_BLOG = "blog"
+        const val PREF_KEY_IMAGE = "image"
+        const val PREF_KEY_KIN = "kin"
+
+
+        const val INTENT_KEY_LINK = "link"
+
+    }
+}

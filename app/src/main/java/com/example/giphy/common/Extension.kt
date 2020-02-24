@@ -10,6 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
 
@@ -31,6 +32,19 @@ fun bindImage(view: ImageView, res: String) {
         .load(res)
         .into(view)
 }
+
+
+
+@BindingAdapter("bindGif")
+fun bindGif(view: ImageView, res: String) {
+    Glide.with(view.context)
+        .asGif()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .load(res)
+        .into(view)
+}
+
+
 
 @BindingAdapter("bindImageUri")
 fun bindImageUri(view: ImageView, res: String) {
