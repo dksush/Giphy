@@ -19,7 +19,7 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
             RepoInterface.getGifSearch(API_KEY, inputKeyword, offset,
                 success = {
                     Log.v("dksush_성공", it[0].url)
-                    Log.v("dksush_origin", it[0].images?.original?.url)
+                    Log.v("dksush_origin", it[0].images?.fixed_width_small?.url)
                     Log.v("dksush_size", it.size.toString())
                     _searchItem.value = it
                 },

@@ -1,5 +1,7 @@
 package com.example.giphy.ui.base
 
+import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,10 +17,12 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
     override fun onBindViewHolder(holder: H, position: Int) {
         holder.bind(itemList[position])
-        if (position == itemCount - 1 && itemCount >= 10) itemListener.loadMoreItems(
-            currentList, itemCount + 1
-        )
+//        if (position == itemCount - 1 && itemCount >= 10)
+//            itemListener.loadMoreItems(
+//            currentList, itemCount + 1
+//        )
     }
+
 
     override fun getItemCount(): Int {
         return itemList.size
@@ -27,7 +31,8 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
     open fun setData(items: List<T>) {
         this.itemList.clear()
         this.itemList.addAll(items)
-        submitList(items)
+        notifyDataSetChanged()
+        //submitList(items)
 
     }
 
@@ -36,6 +41,17 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
         notifyDataSetChanged()
 
     }
+
+    open fun getScaleSizeHeight(
+      //  context: Context?,
+        width: Int,
+        height: Int,
+        scaleWidth: Int
+    ): Int {
+        return height * scaleWidth / width
+    }
+
+
 
     interface ItemListener<T> {
         fun loadMoreItems(list: List<T>, index: Int)

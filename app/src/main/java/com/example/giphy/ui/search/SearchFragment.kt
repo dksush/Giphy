@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
-    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var searchAdapter: SearchAdapter
     private val viewModel: SearchViewModel by viewModel()
 
     private var offset: Int = 0 // 검색 시작 포지션 위치.
@@ -30,37 +30,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.fragment = this@SearchFragment
         binding.lifecycleOwner = this@SearchFragment
 
-
-        val manager =
-            StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
-        manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         binding.recycle.run {
 
-            homeAdapter = HomeAdapter(object : BaseRecyclerAdapter.ItemListener<SearchData> {
+            searchAdapter = SearchAdapter(context, object : BaseRecyclerAdapter.ItemListener<SearchData> {
                 override fun loadMoreItems(list: List<SearchData>, index: Int) {
-                  //  offset += 1
+                    offset += 1
                     lifecycleScope.launch {
                     }
                 }
             })
-           // layoutManager = manager
-            adapter = homeAdapter
-//            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                    super.onScrollStateChanged(recyclerView, newState)
-//                    (recyclerView.layoutManager as StaggeredGridLayoutManager?)!!.invalidateSpanAssignments()
-//                }
-//            })
+            adapter = searchAdapter
+
         }
-
-
 
 
         lifecycleScope.launch {
             Log.v("dksush", "dkshk")
             offset = 0
             viewModel.getSearchList(offset)
-
 
         }
 

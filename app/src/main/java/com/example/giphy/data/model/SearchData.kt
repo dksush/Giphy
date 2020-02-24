@@ -4,12 +4,12 @@ data class SearchData(
     val id: String,
     val url: String
     //, var images: List<SearchImage>
-    , var images: SearchImage? = null
+    , val images: SearchImage
 
 )
 
 data class SearchImage(
-    var original: ImageOriginal? = null
+    val fixed_width_small: ImgFixedWidthSmall
 //    var original: List<ImageOriginal>
 
 )

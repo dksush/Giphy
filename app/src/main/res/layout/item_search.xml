@@ -15,6 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        >
@@ -22,7 +23,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_thum"
-            bindGif="@{items.images.original.url}"
+            bindGif="@{items.images.fixed_width_small.url}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints"
