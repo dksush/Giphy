@@ -17,6 +17,17 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
     override fun onBindViewHolder(holder: H, position: Int) {
         holder.bind(itemList[position])
+
+
+
+//        if(position>= firstCompletlyVisibleItem && position<= lastCompletlyVisibleItem){
+//            Log.e("visibleItem","position : $position")
+//        }
+
+
+
+
+        Log.v("dksush_po", "onBindViewHolder")
 //        if (position == itemCount - 1 && itemCount >= 10)
 //            itemListener.loadMoreItems(
 //            currentList, itemCount + 1
@@ -29,10 +40,10 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
     }
 
     open fun setData(items: List<T>) {
+        Log.v("dksush", "setData")
         this.itemList.clear()
         this.itemList.addAll(items)
-        notifyDataSetChanged()
-        //submitList(items)
+        submitList(items)
 
     }
 

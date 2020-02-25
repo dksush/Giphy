@@ -3,6 +3,7 @@ package com.example.giphy.common
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.giphy.R
 import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
 
@@ -37,11 +39,15 @@ fun bindImage(view: ImageView, res: String) {
 
 @BindingAdapter("bindGif")
 fun bindGif(view: ImageView, res: String) {
+    //Log.v("dksush", "gif")
     Glide.with(view.context)
         .asGif()
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
+      //  .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .placeholder(R.drawable.ic_launcher_foreground)
+        .error(R.drawable.ic_launcher_foreground)
         .load(res)
         .into(view)
+
 }
 
 
