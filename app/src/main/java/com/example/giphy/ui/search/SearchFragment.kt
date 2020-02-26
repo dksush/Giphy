@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.giphy.MainActivity
 import com.example.giphy.R
 import com.example.giphy.data.model.SearchData
 import com.example.giphy.databinding.FragmentSearchBinding
@@ -68,7 +69,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         }
 
 
-//        binding.btn.setOnClickListener {
+//        binding.btnSearch.setOnClickListener {
 //            (activity as MainActivity).replaceFragment(FavoriteFragment.newInstance())
 //
 //        }

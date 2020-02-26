@@ -3,17 +3,21 @@ package com.example.giphy.ui.search
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.recyclerview.widget.DiffUtil
+import com.example.giphy.MainActivity
 import com.example.giphy.common.StringConst
 import com.example.giphy.data.model.SearchData
 import com.example.giphy.databinding.ItemSearchBinding
 import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
 import com.example.giphy.ui.detail.GifDetailActivity
+import com.example.giphy.ui.detail.GifDetailFragment
+import com.example.giphy.ui.favorite.FavoriteFragment
 
 class SearchAdapter(private val context: Context, itemListener: ItemListener<SearchData>) :
     BaseRecyclerAdapter<SearchData, SearchAdapter.SearchHolder>(itemListener, DiffCallback()) {
@@ -37,15 +41,29 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
         init {
 
             binding.setOnClick {
-                Intent(it.context, GifDetailActivity::class.java).apply {
 
-                    putExtra(StringConst.INTENT_KEY_GIF_INFO, item)
-//                    putExtra(StringConst.INTENT_KEY_GIF_FIXED_WIDTH_URL, item.url)
-//                    putExtra(StringConst.INTENT_KEY_GIF_ID, item.id)
-//                    putExtra(StringConst.INTENT_KEY_GIF_title, item.title)
+                Log.v("dksush", "here")
+                val gifDetailFragment = GifDetailFragment()
+                val bundle = Bundle()
+                bundle.putSerializable(StringConst.INTENT_KEY_GIF_INFO, item)
+                Log.v("dksush_id", item.id)
+                gifDetailFragment.arguments = bundle
 
-                    Log.v("dksush_title", item.title)
-                }.run { it.context.startActivity(this) }
+                Log.v("dksush", "here2")
+                (context as MainActivity).replaceFragment(gifDetailFragment)
+//                (context as MainActivity).replaceFragment(GifDetailFragment.newInstance())
+
+
+
+//                Intent(it.context, GifDetailActivity::class.java).apply {
+//
+//                    putExtra(StringConst.INTENT_KEY_GIF_INFO, item)
+////                    putExtra(StringConst.INTENT_KEY_GIF_FIXED_WIDTH_URL, item.url)
+////                    putExtra(StringConst.INTENT_KEY_GIF_ID, item.id)
+////                    putExtra(StringConst.INTENT_KEY_GIF_title, item.title)
+//
+//                    Log.v("dksush_title", item.title)
+//                }.run { it.context.startActivity(this) }
             }
 
             val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager

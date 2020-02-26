@@ -1,12 +1,14 @@
 package com.example.giphy.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 data class SearchData(
     val id: String,
     val url: String,
     val title: String,
-    val images: SearchImage
+    var images: SearchImage
 ) : Serializable
 
 data class SearchImage(

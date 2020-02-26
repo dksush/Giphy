@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.giphy.databinding.ActivityMainBinding
@@ -14,11 +15,12 @@ import com.example.giphy.ui.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val pagerAdapter = PagerAdapter(this)
-    private val fm = supportFragmentManager.beginTransaction()
+    private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +46,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun replaceFragment(fragment: Fragment?) {
+
+
+
         fragment?.let {
-            fm.replace(R.id.con_test, it).addToBackStack(null).commit()
+            var transaction = fm.beginTransaction()
+            transaction.replace(R.id.con_test, it).addToBackStack(null).commit()
         }
     }
 
