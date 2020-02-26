@@ -40,7 +40,6 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
     }
 
     open fun setData(items: List<T>) {
-        Log.v("dksush", "setData")
         this.itemList.clear()
         this.itemList.addAll(items)
         submitList(items)

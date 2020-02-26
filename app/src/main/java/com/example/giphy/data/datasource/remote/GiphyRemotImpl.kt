@@ -1,4 +1,4 @@
-package com.example.giphy.data.source.remote
+package com.example.giphy.data.datasource.remote
 
 import android.util.Log
 import com.example.giphy.apis.NetworkUtil

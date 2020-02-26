@@ -14,7 +14,15 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        Log.v("dksush", "onStart")
+    }
 
+    override fun onResume() {
+        super.onResume()
+        Log.v("dksush", "onResume") // 온 리슘은 게속 호출됨
+    }
 
     companion object{
         fun newInstance(): FavoriteFragment {

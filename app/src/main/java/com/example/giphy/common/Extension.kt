@@ -42,7 +42,7 @@ fun bindGif(view: ImageView, res: String) {
     //Log.v("dksush", "gif")
     Glide.with(view.context)
         .asGif()
-      //  .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(R.drawable.ic_launcher_foreground)
         .error(R.drawable.ic_launcher_foreground)
         .load(res)

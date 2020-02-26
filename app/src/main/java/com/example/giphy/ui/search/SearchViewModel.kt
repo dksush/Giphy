@@ -1,6 +1,5 @@
 package com.example.giphy.ui.search
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.giphy.common.StringConst.Companion.API_KEY
@@ -18,9 +17,6 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
         if (inputKeyword.isNotBlank() && inputKeyword.isNotEmpty()) {
             RepoInterface.getGifSearch(API_KEY, inputKeyword, offset,
                 success = {
-                    Log.v("dksush_성공", it[0].url)
-                    Log.v("dksush_origin", it[0].images?.fixed_width_small?.url)
-                    Log.v("dksush_size", it.size.toString())
                     _searchItem.value = it
                 },
                 fail = {

@@ -32,8 +32,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.vm = viewModel
         binding.fragment = this@SearchFragment
         binding.lifecycleOwner = this@SearchFragment
+
         var manager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL )
-        var manager2 = LinearLayoutManager(context)
+
 
         binding.recycle.run {
             searchAdapter = SearchAdapter(context, object : BaseRecyclerAdapter.ItemListener<SearchData> {
@@ -45,25 +46,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             })
             adapter = searchAdapter
 
-            layoutManager = manager
-
-
-
-
-
-            addOnScrollListener(object  : RecyclerView.OnScrollListener(){
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-
-                    var lastPositions = IntArray(manager.spanCount)
-                    var firstVisibleImage = manager.findLastCompletelyVisibleItemPositions(lastPositions)
-                    Log.v("dksush_last_size", firstVisibleImage.size.toString())
-
-                }
-            })
-
-
-
+            //layoutManager = manager
+//            addOnScrollListener(object  : RecyclerView.OnScrollListener(){
+//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                    super.onScrolled(recyclerView, dx, dy)
+//
+//                    var lastPositions = IntArray(manager.spanCount)
+//                    var firstVisibleImage = manager.findLastCompletelyVisibleItemPositions(lastPositions)
+//                    Log.v("dksush_last_size", firstVisibleImage.size.toString())
+//
+//                }
+//            })
 
         }
 
@@ -83,10 +76,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     fun onBtnSearch(view: View){
-        Log.v("dksush", "검색버튼")
         lifecycleScope.launch {
-//            offset = 0
-//            viewModel.getSearchList(offset)
+            offset = 0
+            viewModel.getSearchList(offset)
 
         }
 

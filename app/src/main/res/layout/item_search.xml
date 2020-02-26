@@ -28,7 +28,8 @@
             tools:ignore="MissingConstraints"
             tools:src="@drawable/ic_launcher_foreground"
             android:scaleType="fitXY"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:onClick="@{OnClick}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

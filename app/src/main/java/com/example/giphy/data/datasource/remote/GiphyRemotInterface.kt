@@ -1,4 +1,4 @@
-package com.example.giphy.data.source.remote
+package com.example.giphy.data.datasource.remote
 
 import com.example.giphy.data.model.SearchData
 
