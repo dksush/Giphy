@@ -1,6 +1,6 @@
 package com.example.giphy.data.datasource.remote
 
-import com.example.giphy.data.model.SearchData
+import com.example.giphy.data.model.SearchResponse
 
 interface GiphyRemotInterface {
 
@@ -8,7 +8,15 @@ interface GiphyRemotInterface {
         api_key: String,
         q : String,
         offset: Int,
-        success: (result: List<SearchData>) -> Unit,
+        success: (result: List<SearchResponse>) -> Unit,
         fail: (Throwable) -> Unit
+    )
+
+    fun getFavoriteItme(
+        api_key: String,
+        ids : String,
+        success: (result: List<SearchResponse>) -> Unit,
+        fail: (Throwable) -> Unit
+
     )
 }

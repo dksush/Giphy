@@ -38,8 +38,7 @@ fun bindImage(view: ImageView, res: String) {
 
 
 @BindingAdapter("bindGif")
-fun bindGif(view: ImageView, res: String) {
-    //Log.v("dksush", "gif")
+fun bindGif(view: ImageView, res: String?) {
     Glide.with(view.context)
         .asGif()
         .diskCacheStrategy(DiskCacheStrategy.ALL)

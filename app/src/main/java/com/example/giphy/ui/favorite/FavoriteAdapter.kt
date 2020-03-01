@@ -1,9 +1,8 @@
-package com.example.giphy.ui.search
+package com.example.giphy.ui.favorite
 
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -16,11 +15,12 @@ import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
 import com.example.giphy.ui.detail.GifDetailFragment
 
-class SearchAdapter(private val context: Context, itemListener: ItemListener<SearchResponse>) :
-    BaseRecyclerAdapter<SearchResponse, SearchAdapter.SearchHolder>(itemListener, DiffCallback()) {
+class FavoriteAdapter(private val context: Context, itemListener: ItemListener<SearchResponse>) :
+    BaseRecyclerAdapter<SearchResponse, FavoriteAdapter.FavoriteHolder>(itemListener, DiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
-        return SearchHolder(
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteHolder {
+        return FavoriteHolder(
             ItemGifBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -29,7 +29,8 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
         )
     }
 
-    inner class SearchHolder(private val binding: ItemGifBinding) :
+
+    inner class FavoriteHolder(private val binding: ItemGifBinding) :
         BaseViewHolder<SearchResponse>(binding.root) {
 
         private lateinit var item: SearchResponse
@@ -44,7 +45,6 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
                 (context as MainActivity).replaceFragment(gifDetailFragment)
             }
 
-
             val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = wm.defaultDisplay
             val size = Point()
@@ -55,12 +55,6 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
 
         override fun bind(item: SearchResponse) {
             this.item = item
-//            binding.contentLayout.layoutParams.height = getScaleSizeHeight(
-//                item.images?.fixed_width_small.width,
-//                item.images.fixed_width_small.height,
-//                width
-//            )
-
             with(binding) {
                 items = item
                 executePendingBindings()
@@ -68,6 +62,8 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
         }
 
     }
+
+
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<SearchResponse>() {

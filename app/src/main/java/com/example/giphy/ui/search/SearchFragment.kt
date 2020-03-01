@@ -1,18 +1,14 @@
 package com.example.giphy.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.giphy.MainActivity
 import com.example.giphy.R
-import com.example.giphy.data.model.SearchData
+import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.FragmentSearchBinding
 import com.example.giphy.ui.base.BaseFragment
-import com.example.giphy.ui.base.BaseRecyclerAdapter
+import com.example.giphy.ui.base.BaseRecyclerAdapter.ItemListener
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,9 +17,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     private lateinit var searchAdapter: SearchAdapter
     private val viewModel: SearchViewModel by viewModel()
-
-
-
 
     private var offset: Int = 0 // 검색 시작 포지션 위치.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,12 +27,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.fragment = this@SearchFragment
         binding.lifecycleOwner = this@SearchFragment
 
-        var manager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL )
+        var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
 
         binding.recycle.run {
-            searchAdapter = SearchAdapter(context, object : BaseRecyclerAdapter.ItemListener<SearchData> {
-                override fun loadMoreItems(list: List<SearchData>, index: Int) {
+            searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
+                override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
                     offset += 1
                     lifecycleScope.launch {
                     }
@@ -68,15 +61,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         }
 
+        lifecycleScope.launch {
+            viewModel.requestLikedItem()
+        }
 
-//        binding.btnSearch.setOnClickListener {
-//            (activity as MainActivity).replaceFragment(FavoriteFragment.newInstance())
-//
-//        }
 
     }
 
-    fun onBtnSearch(view: View){
+    fun onBtnSearch(view: View) {
         lifecycleScope.launch {
             offset = 0
             viewModel.getSearchList(offset)

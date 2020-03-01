@@ -1,7 +1,5 @@
 package com.example.giphy.ui.base
 
-import android.content.Context
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,21 +15,10 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
     override fun onBindViewHolder(holder: H, position: Int) {
         holder.bind(itemList[position])
-
-
-
-//        if(position>= firstCompletlyVisibleItem && position<= lastCompletlyVisibleItem){
-//            Log.e("visibleItem","position : $position")
-//        }
-
-
-
-
-        Log.v("dksush_po", "onBindViewHolder")
-//        if (position == itemCount - 1 && itemCount >= 10)
-//            itemListener.loadMoreItems(
-//            currentList, itemCount + 1
-//        )
+        if (position == itemCount - 1 && itemCount >= 10)
+            itemListener.loadMoreItems(
+                currentList, itemCount + 1
+            )
     }
 
 

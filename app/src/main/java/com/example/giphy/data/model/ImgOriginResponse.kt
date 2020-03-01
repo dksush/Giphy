@@ -2,7 +2,7 @@ package com.example.giphy.data.model
 
 import java.io.Serializable
 
-data class ImgOriginal (
+data class ImgOriginResponse (
 
     val url: String,
     val webp: String,

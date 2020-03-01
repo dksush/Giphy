@@ -7,7 +7,7 @@
 
         <variable
             name="items"
-            type="com.example.giphy.data.model.SearchData" />
+            type="com.example.giphy.data.model.SearchResponse" />
 
         <variable
             name="OnClick"
@@ -30,7 +30,6 @@
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:onClick="@{OnClick}"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

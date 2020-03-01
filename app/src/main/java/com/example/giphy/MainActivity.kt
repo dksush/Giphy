@@ -46,9 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun replaceFragment(fragment: Fragment?) {
-
-
-
         fragment?.let {
             var transaction = fm.beginTransaction()
             transaction.replace(R.id.con_test, it).addToBackStack(null).commit()
