@@ -66,3 +66,13 @@ fun RecyclerView.setData(items: List<Any>?) {
         }
     }
 }
+
+@Suppress("UNCHECKED_CAST")
+@BindingAdapter("setAddData")
+fun RecyclerView.setAddData(items: List<Any>?) {
+    (this.adapter as? BaseRecyclerAdapter<Any, BaseViewHolder<Any>>)?.run {
+        items?.let {
+            setAddData(items)
+        }
+    }
+}

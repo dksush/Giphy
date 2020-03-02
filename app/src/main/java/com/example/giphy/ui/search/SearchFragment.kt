@@ -33,34 +33,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.recycle.run {
             searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
                 override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
-                    offset += 1
+                    offset += index
                     lifecycleScope.launch {
+                        viewModel.requestAddItem(offset)
                     }
                 }
             })
             adapter = searchAdapter
-
-            //layoutManager = manager
-//            addOnScrollListener(object  : RecyclerView.OnScrollListener(){
-//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                    super.onScrolled(recyclerView, dx, dy)
-//
-//                    var lastPositions = IntArray(manager.spanCount)
-//                    var firstVisibleImage = manager.findLastCompletelyVisibleItemPositions(lastPositions)
-//                    Log.v("dksush_last_size", firstVisibleImage.size.toString())
-//
-//                }
-//            })
-
         }
 
-
-        lifecycleScope.launch {
-            offset = 0
-            viewModel.getSearchList(offset)
-
-        }
-
+        // 로컬 디비에 저장된 좋아요 게시물 id값 호출.
         lifecycleScope.launch {
             viewModel.requestLikedItem()
         }
@@ -70,18 +52,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     fun onBtnSearch(view: View) {
         lifecycleScope.launch {
-            offset = 0
-            viewModel.getSearchList(offset)
+            viewModel.requestSearch()
 
         }
 
-    }
-
-
-    companion object {
-        fun newInstance(): SearchFragment {
-            return SearchFragment()
-        }
     }
 
 }

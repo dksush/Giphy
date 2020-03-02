@@ -1,22 +1,24 @@
 package com.example.giphy.ui.favorite
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.recyclerview.widget.DiffUtil
-import com.example.giphy.MainActivity
 import com.example.giphy.common.StringConst
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.ItemGifBinding
 import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
-import com.example.giphy.ui.detail.GifDetailFragment
+import com.example.giphy.ui.detail.GifDetailActivity
 
 class FavoriteAdapter(private val context: Context, itemListener: ItemListener<SearchResponse>) :
-    BaseRecyclerAdapter<SearchResponse, FavoriteAdapter.FavoriteHolder>(itemListener, DiffCallback()) {
+    BaseRecyclerAdapter<SearchResponse, FavoriteAdapter.FavoriteHolder>(
+        itemListener,
+        DiffCallback()
+    ) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteHolder {
@@ -38,11 +40,9 @@ class FavoriteAdapter(private val context: Context, itemListener: ItemListener<S
 
         init {
             binding.setOnClick {
-                val gifDetailFragment = GifDetailFragment()
-                val bundle = Bundle()
-                bundle.putSerializable(StringConst.INTENT_KEY_GIF_INFO, item)
-                gifDetailFragment.arguments = bundle
-                (context as MainActivity).replaceFragment(gifDetailFragment)
+                Intent(it.context, GifDetailActivity::class.java).apply {
+                    putExtra(StringConst.INTENT_KEY_GIF_INFO, item)
+                }.run { it.context.startActivity(this) }
             }
 
             val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager

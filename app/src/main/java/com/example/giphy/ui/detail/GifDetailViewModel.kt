@@ -11,13 +11,13 @@ class GifDetailViewModel(
 
     val title = searchResponse.title
     var url = searchResponse.images?.original?.url
-    var isLiked :Boolean = false
+    var isLiked: Boolean = false
 
 
-    fun saveLikeGif(){
-        if (isLiked){
+    fun saveLikeGif() {
+        if (isLiked) {
             RepoInterface.saveLikedItem(searchResponse)
-        }else{
+        } else {
             RepoInterface.deleteLikedItem(searchResponse.id)
         }
 

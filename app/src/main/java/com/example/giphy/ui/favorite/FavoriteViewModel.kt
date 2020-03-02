@@ -1,6 +1,5 @@
 package com.example.giphy.ui.favorite
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,22 +12,20 @@ class FavoriteViewModel(private val RepoInterface: GiphyRepositoryInterface) : V
 
 
     private val _favoriteItem = MutableLiveData<List<SearchResponse>>()
-    val favoriteItem : LiveData<List<SearchResponse>> get() = _favoriteItem
+    val favoriteItem: LiveData<List<SearchResponse>> get() = _favoriteItem
 
 
     fun getFavoriteItem() {
-        val text = LikedItemInfo.SearchResponse.toString()
-            .substring(1, LikedItemInfo.SearchResponse.toString().length - 1)
+        val text = LikedItemInfo.SearchResponse.toString().run {
+            this.substring(1, this.length - 1)
+        }
 
         RepoInterface.getFavoriteItme(
             StringConst.API_KEY, text,
             success = {
                 _favoriteItem.value = it
-                Log.v("dksush_text", "edmd")
-                Log.v("dksush_api", it.size.toString())
             },
             fail = {
-                Log.v("dksush_fail", it.toString())
             })
 
     }

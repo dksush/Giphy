@@ -1,6 +1,5 @@
 package com.example.giphy.ui.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,19 +11,24 @@ import com.example.giphy.data.repository.GiphyRepositoryInterface
 
 class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : ViewModel() {
 
-    private val _searchItem = MutableLiveData<List<SearchResponse>>()
-    val searchItem :LiveData<List<SearchResponse>> get() = _searchItem
+    private val _searchList = MutableLiveData<List<SearchResponse>>()
+    val searchList: LiveData<List<SearchResponse>> get() = _searchList
+
+
+    private val _addList = MutableLiveData<List<SearchResponse>>()
+    val addList: LiveData<List<SearchResponse>> get() = _addList
+
+
     var inputKeyword = "hi"
 
 
-    fun getSearchList(offset: Int) {
+    fun requestSearch() {
         if (inputKeyword.isNotBlank() && inputKeyword.isNotEmpty()) {
-            RepoInterface.getGifSearch(API_KEY, inputKeyword, offset,
+            RepoInterface.getGifSearch(API_KEY, inputKeyword, 0,
                 success = {
-                    _searchItem.value = it
+                    _searchList.value = it
                 },
                 fail = {
-
                 })
 
         } else {
@@ -32,6 +36,18 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
         }
 
     }
+
+    fun requestAddItem(offset: Int) {
+        RepoInterface.getGifSearch(API_KEY, inputKeyword, offset,
+            success = {
+                _addList.value = it
+            },
+            fail = {
+            })
+
+
+    }
+
 
     // 좋아요 누른 아이템 아이디목룍.
     suspend fun requestLikedItem() {
