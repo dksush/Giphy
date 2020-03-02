@@ -20,7 +20,7 @@ class FavoriteViewModel(private val RepoInterface: GiphyRepositoryInterface) : V
             this.substring(1, this.length - 1)
         }
 
-        RepoInterface.getFavoriteItme(
+        RepoInterface.getFavoriteItem(
             StringConst.API_KEY, text,
             success = {
                 _favoriteItem.value = it

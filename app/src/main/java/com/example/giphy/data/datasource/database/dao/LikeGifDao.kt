@@ -7,7 +7,7 @@ import com.example.giphy.data.model.SearchResponse
 interface LikeGifDao {
 
     @Query("SELECT id from like_item")
-    suspend fun getAll(): MutableList<String>
+    suspend fun getLikedItem(): MutableList<String>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(likedItem_id: SearchResponse)

@@ -32,10 +32,10 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
         BaseViewHolder<SearchResponse>(binding.root) {
 
         private lateinit var item: SearchResponse
+
+        // 디바이스 크기 측정.
         private val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        private val size = Point().also {
-            wm.defaultDisplay.getSize(it)
-        }
+        private val size = Point().also { wm.defaultDisplay.getSize(it) }
         private var width = 0
 
         init {
@@ -50,7 +50,7 @@ class SearchAdapter(private val context: Context, itemListener: ItemListener<Sea
         }
 
         override fun bind(item: SearchResponse) {
-            // 높이값 지정.
+            // 높이값 반영.
             binding.contentLayout.layoutParams.height =
                 getScaleSizeHeight(
                     item.images?.fixed_width_small?.width!!,

@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity() {
     private val navigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_movie -> {
+                R.id.menu_search -> {
                     setPageWithIndex(0)
                     true
                 }
-                R.id.menu_image -> {
+                R.id.menu_favorite -> {
                     setPageWithIndex(1)
                     true
                 }

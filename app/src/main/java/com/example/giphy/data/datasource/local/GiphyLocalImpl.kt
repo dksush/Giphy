@@ -9,18 +9,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GiphyLocalImpl(
-    private val spm: SharedPreferences
-    , private val likeGifDatabase: LikeGifDatabase
+    private val spm: SharedPreferences,
+    private val likeGifDatabase: LikeGifDatabase
 ) : GiphyLocalInterface {
 
 
     override suspend fun getLikedItem(): MutableList<String> {
-        return likeGifDatabase.likeGifDao().getAll()
+        return likeGifDatabase.likeGifDao().getLikedItem()
     }
 
     override fun saveLikedItem(likedItem_id: SearchResponse) {
         CoroutineScope(Dispatchers.IO).launch {
+            // 로컬 디비 저장
             likeGifDatabase.likeGifDao().insertAll(likedItem_id)
+            // 싱글톤 갱신
             LikedItemInfo.SearchResponse.add(likedItem_id.id)
         }
 

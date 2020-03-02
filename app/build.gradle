@@ -42,31 +42,33 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
 
-    // glide
+
+    // 레트로핏 : 서버통신
+    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    // glide : 이미지
     implementation 'com.github.bumptech.glide:glide:4.10.0'
 
-    //fresco
+    //fresco : 이미지
     implementation 'com.facebook.fresco:fresco:2.1.0'
     implementation 'com.facebook.fresco:animated-gif:2.1.0'
 
-    // coroutine
+    // coroutine : 동기/비동기, 메인/서브 스레드
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
 
-    // ViewModel and LiveData
+    // ViewModel and LiveData : mvvm 패턴 사용.
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    // koin
+    // koin : 의존성 주입.
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
     
-    // room
+    // room : 로컬디비 사용.
     implementation "androidx.room:room-runtime:2.2.4"
     implementation "androidx.room:room-ktx:2.2.4"
     kapt "androidx.room:room-compiler:2.2.4"

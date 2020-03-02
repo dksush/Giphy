@@ -2,8 +2,10 @@ package com.example.giphy.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.giphy.R
+import com.example.giphy.common.toast
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.FragmentSearchBinding
 import com.example.giphy.ui.base.BaseFragment
@@ -46,6 +48,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             viewModel.requestLikedItem()
         }
 
+
+        observeListener()
+
     }
 
     fun onBtnSearch() {
@@ -53,6 +58,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             viewModel.requestSearch()
 
         }
+
+    }
+
+    private fun observeListener() {
+        viewModel.blankInputText.observe(viewLifecycleOwner, Observer {
+            requireContext().toast(getString(R.string.blank_search_text))
+        })
 
     }
 

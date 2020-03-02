@@ -14,11 +14,9 @@ class GiphyRepositoryImpl(
         api_key: String,
         q: String,
         offset: Int,
-
         success: (result: List<SearchResponse>) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-
         RemoteInterface.getGifSearch(
             api_key, q, offset,
             success,
@@ -27,19 +25,19 @@ class GiphyRepositoryImpl(
 
     }
 
-    override fun getFavoriteItme(
+    override fun getFavoriteItem(
         api_key: String,
         ids: String,
         success: (result: List<SearchResponse>) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-
-        RemoteInterface.getFavoriteItme(
-            api_key,ids,
+        RemoteInterface.getFavoriteItem(
+            api_key, ids,
             success,
             fail
         )
     }
+
 
     override fun saveLikedItem(likedItem_id: SearchResponse) {
         LocalInterface.saveLikedItem(likedItem_id)
@@ -48,7 +46,6 @@ class GiphyRepositoryImpl(
     override fun deleteLikedItem(id: String) {
         LocalInterface.deleteLikedItem(id)
     }
-
 
     override suspend fun getLikedItem(): MutableList<String> {
         return LocalInterface.getLikedItem()

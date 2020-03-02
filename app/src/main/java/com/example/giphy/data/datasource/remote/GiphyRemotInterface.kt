@@ -12,7 +12,7 @@ interface GiphyRemotInterface {
         fail: (Throwable) -> Unit
     )
 
-    fun getFavoriteItme(
+    fun getFavoriteItem(
         api_key: String,
         ids : String,
         success: (result: List<SearchResponse>) -> Unit,

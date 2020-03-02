@@ -4,4 +4,6 @@
     <string name="menu_title_favorites">favorites</string>
     <string name="input_home_hint">Search GIPHY</string>
     <string name="btn_home_search">Search</string>
+
+    <string name="blank_search_text">검색어를 입력해 주세요.</string>
 </resources>

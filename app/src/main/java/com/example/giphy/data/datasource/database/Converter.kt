@@ -1,4 +1,4 @@
-package com.example.giphy.common
+package com.example.giphy.data.datasource.database
 
 import androidx.room.TypeConverter
 import com.example.giphy.data.model.SearchResponse

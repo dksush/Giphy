@@ -11,15 +11,16 @@ import com.example.giphy.data.repository.GiphyRepositoryInterface
 
 class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : ViewModel() {
 
+    // 검색 리스트
     private val _searchList = MutableLiveData<List<SearchResponse>>()
     val searchList: LiveData<List<SearchResponse>> get() = _searchList
 
-
+    // 페이징 리스트
     private val _addList = MutableLiveData<List<SearchResponse>>()
     val addList: LiveData<List<SearchResponse>> get() = _addList
 
-
-    var inputKeyword = "hi"
+    var inputKeyword = ""
+    val blankInputText = MutableLiveData<Unit>()
 
 
     fun requestSearch() {
@@ -32,7 +33,7 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
                 })
 
         } else {
-
+            blankInputText.value = Unit
         }
 
     }
