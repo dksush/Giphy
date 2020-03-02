@@ -3,7 +3,6 @@ package com.example.giphy.ui.search
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.giphy.R
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.FragmentSearchBinding
@@ -22,35 +21,34 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(binding) {
+            vm = viewModel
+            fragment = this@SearchFragment
+            lifecycleOwner = this@SearchFragment
 
-        binding.vm = viewModel
-        binding.fragment = this@SearchFragment
-        binding.lifecycleOwner = this@SearchFragment
-
-        var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-
-        binding.recycle.run {
-            searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
-                override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
-                    offset += index
-                    lifecycleScope.launch {
-                        viewModel.requestAddItem(offset)
+            recycle.run {
+                searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
+                    override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
+                        offset += index
+                        lifecycleScope.launch {
+                            viewModel.requestAddItem(offset)
+                        }
                     }
-                }
-            })
-            adapter = searchAdapter
+                })
+                adapter = searchAdapter
+
+            }
         }
+
 
         // 로컬 디비에 저장된 좋아요 게시물 id값 호출.
         lifecycleScope.launch {
             viewModel.requestLikedItem()
         }
 
-
     }
 
-    fun onBtnSearch(view: View) {
+    fun onBtnSearch() {
         lifecycleScope.launch {
             viewModel.requestSearch()
 

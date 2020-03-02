@@ -3,7 +3,6 @@ package com.example.giphy.common
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +14,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.giphy.R
 import com.example.giphy.ui.base.BaseRecyclerAdapter
 import com.example.giphy.ui.base.BaseViewHolder
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.view.SimpleDraweeView
 
 
 @SuppressLint("ShowToast")
@@ -36,9 +37,8 @@ fun bindImage(view: ImageView, res: String) {
 }
 
 
-
-@BindingAdapter("bindGif")
-fun bindGif(view: ImageView, res: String?) {
+@BindingAdapter("bindGlideGif")
+fun bindGlideGif(view: ImageView, res: String?) {
     Glide.with(view.context)
         .asGif()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -49,6 +49,14 @@ fun bindGif(view: ImageView, res: String?) {
 
 }
 
+
+@BindingAdapter("bindFrescoGif")
+fun bindFrescoGif(view: SimpleDraweeView, res: String?) {
+    view.controller = Fresco.newDraweeControllerBuilder()
+        .setUri(res)
+        .setAutoPlayAnimations(true)
+        .build()
+}
 
 
 @BindingAdapter("bindImageUri")

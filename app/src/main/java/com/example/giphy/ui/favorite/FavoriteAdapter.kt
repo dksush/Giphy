@@ -36,7 +36,11 @@ class FavoriteAdapter(private val context: Context, itemListener: ItemListener<S
         BaseViewHolder<SearchResponse>(binding.root) {
 
         private lateinit var item: SearchResponse
-        private var width: Int = 0
+        private val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        private val size = Point().also {
+            wm.defaultDisplay.getSize(it)
+        }
+        private var width = 0
 
         init {
             binding.setOnClick {
@@ -45,15 +49,19 @@ class FavoriteAdapter(private val context: Context, itemListener: ItemListener<S
                 }.run { it.context.startActivity(this) }
             }
 
-            val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val display = wm.defaultDisplay
-            val size = Point()
-            display.getSize(size)
             width = size.x / 2
         }
 
 
         override fun bind(item: SearchResponse) {
+            // 높이값 지정.
+            binding.contentLayout.layoutParams.height =
+                getScaleSizeHeight(
+                    item.images?.fixed_width_small?.width!!,
+                    item.images.fixed_width_small.height,
+                    width
+                )
+
             this.item = item
             with(binding) {
                 items = item

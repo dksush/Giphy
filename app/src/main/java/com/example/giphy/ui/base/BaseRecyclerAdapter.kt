@@ -1,5 +1,7 @@
 package com.example.giphy.ui.base
 
+import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -29,7 +31,8 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
     open fun setData(items: List<T>) {
         this.itemList.clear()
         this.itemList.addAll(items)
-        submitList(items)
+        //submitList(items)
+        notifyDataSetChanged()
 
     }
 
@@ -48,6 +51,12 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
         return height * scaleWidth / width
     }
 
+
+    open fun convertPixelsToDp(context: Context, px: Float): Float {
+        val resources = context.resources
+        val metrics = resources.displayMetrics
+        return px / (metrics.densityDpi / 160f)
+    }
 
 
     interface ItemListener<T> {
