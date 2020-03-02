@@ -2,7 +2,7 @@ package com.example.giphy.data.datasource.remote
 
 import com.example.giphy.data.model.SearchResponse
 
-interface GiphyRemotInterface {
+interface GiphyRemoteInterface {
 
     fun getGifSearch(
         api_key: String,

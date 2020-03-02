@@ -14,14 +14,14 @@ interface Api {
     }
 
     @GET("gifs/search")
-    fun getGifSearch(
+    fun getRequestSearch(
         @Query("api_key") api_key: String,
         @Query("q") q: String,
         @Query("offset") page: Int
     ): Call<GiphyQueryResponse<SearchResponse>>
 
     @GET("gifs")
-    fun getLikedItem(
+    fun getFavoriteItem(
         @Query("api_key") api_key: String,
         @Query("ids") ids: String
     ): Call<GiphyQueryResponse<SearchResponse>>

@@ -1,12 +1,12 @@
 package com.example.giphy.data.repository
 
 import com.example.giphy.data.datasource.local.GiphyLocalInterface
-import com.example.giphy.data.datasource.remote.GiphyRemotInterface
+import com.example.giphy.data.datasource.remote.GiphyRemoteInterface
 import com.example.giphy.data.model.SearchResponse
 
 class GiphyRepositoryImpl(
-    private val RemoteInterface: GiphyRemotInterface,
-    private val LocalInterface: GiphyLocalInterface
+    private val remoteInterface: GiphyRemoteInterface,
+    private val localInterface: GiphyLocalInterface
 ) : GiphyRepositoryInterface {
 
 
@@ -17,7 +17,7 @@ class GiphyRepositoryImpl(
         success: (result: List<SearchResponse>) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        RemoteInterface.getGifSearch(
+        remoteInterface.getGifSearch(
             api_key, q, offset,
             success,
             fail
@@ -31,7 +31,7 @@ class GiphyRepositoryImpl(
         success: (result: List<SearchResponse>) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        RemoteInterface.getFavoriteItem(
+        remoteInterface.getFavoriteItem(
             api_key, ids,
             success,
             fail
@@ -40,15 +40,15 @@ class GiphyRepositoryImpl(
 
 
     override fun saveLikedItem(likedItem_id: SearchResponse) {
-        LocalInterface.saveLikedItem(likedItem_id)
+        localInterface.saveLikedItem(likedItem_id)
     }
 
     override fun deleteLikedItem(id: String) {
-        LocalInterface.deleteLikedItem(id)
+        localInterface.deleteLikedItem(id)
     }
 
     override suspend fun getLikedItem(): MutableList<String> {
-        return LocalInterface.getLikedItem()
+        return localInterface.getLikedItem()
     }
 
 
