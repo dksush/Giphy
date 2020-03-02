@@ -69,8 +69,10 @@ fun bindImageUri(view: ImageView, res: String) {
 @BindingAdapter("setData")
 fun RecyclerView.setData(items: List<Any>?) {
     (this.adapter as? BaseRecyclerAdapter<Any, BaseViewHolder<Any>>)?.run {
-        items?.let {
+        if (items != null) {
             setData(items)
+        } else {
+            clearData()
         }
     }
 }

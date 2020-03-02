@@ -14,19 +14,25 @@ class FavoriteViewModel(private val RepoInterface: GiphyRepositoryInterface) : V
     private val _favoriteItem = MutableLiveData<List<SearchResponse>>()
     val favoriteItem: LiveData<List<SearchResponse>> get() = _favoriteItem
 
+    val nonItem = MutableLiveData<Unit>()
 
     fun getFavoriteItem() {
-        val text = LikedItemInfo.SearchResponse.toString().run {
-            this.substring(1, this.length - 1)
+
+        if (LikedItemInfo.SearchResponse.size > 0) {
+            val text = LikedItemInfo.SearchResponse.toString().run {
+                this.substring(1, this.length - 1)
+            }
+
+            RepoInterface.getFavoriteItem(
+                StringConst.API_KEY, text,
+                success = {
+                    _favoriteItem.value = it
+                },
+                fail = {
+                })
         }
-
-        RepoInterface.getFavoriteItem(
-            StringConst.API_KEY, text,
-            success = {
-                _favoriteItem.value = it
-            },
-            fail = {
-            })
-
+        else {
+            _favoriteItem.value = null
+        }
     }
 }
