@@ -55,7 +55,7 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
 
     interface ItemListener<T> {
-        fun loadMoreItems(list: List<T>, index: Int)
+        fun loadMoreItems(list: List<T>, itemCount: Int)
         fun itemOnClick(item: T)
     }
 }

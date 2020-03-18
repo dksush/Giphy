@@ -26,7 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private val viewModel: SearchViewModel by viewModel()
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private var offset: Int = 0 // 검색 시작 포지션 위치.
+    private var searchStartIndex: Int = 0 // 검색 시작 포지션 위치.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,10 +37,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
             recycle.run {
                 searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
-                    override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
-                        offset += index
+                    override fun loadMoreItems(list: List<SearchResponse>, itemCount: Int) {
+                        searchStartIndex = itemCount
                         lifecycleScope.launch {
-                            viewModel.requestAddItem(offset)
+                            viewModel.requestAddItem(searchStartIndex)
                         }
                     }
                     override fun itemOnClick(item: SearchResponse) {

@@ -64,11 +64,14 @@ class SearchAdapter(
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<SearchResponse>() {
+    // 두 객체 같은 항목인지 여부
     override fun areItemsTheSame(oldItem: SearchResponse, newItem: SearchResponse): Boolean {
         return oldItem == newItem
 
     }
 
+    // 두 항목의 데이터가 같은지 여.
+    // areItemsTheSame 가 true 반환시에만 호출.
     override fun areContentsTheSame(oldItem: SearchResponse, newItem: SearchResponse): Boolean {
         return oldItem == newItem
     }
