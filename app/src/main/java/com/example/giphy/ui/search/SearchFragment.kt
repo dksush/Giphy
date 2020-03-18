@@ -76,6 +76,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         viewModel.blankInputText.observe(viewLifecycleOwner, Observer {
             requireContext().toast(getString(R.string.blank_search_text))
         })
+        viewModel.errorToast.observe(viewLifecycleOwner, Observer {
+            requireContext().toast(getString(R.string.server_not_respond_text))
+        })
+        viewModel.nonResult.observe(viewLifecycleOwner, Observer {
+            requireContext().toast(getString(R.string.non_result_text))
+        })
+
 
     }
 

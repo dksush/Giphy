@@ -20,6 +20,8 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
 
     var inputKeyword = ""
     val blankInputText = MutableLiveData<Unit>()
+    val errorToast = MutableLiveData<Throwable>()
+    val nonResult = MutableLiveData<Unit>()
 
     // 좋아요 리스트.
     var likedItemInfo = mutableSetOf<String>()
@@ -29,9 +31,14 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
         if (inputKeyword.isNotBlank() && inputKeyword.isNotEmpty()) {
             RepoInterface.getGifSearch(API_KEY, inputKeyword, 0,
                 success = {
-                    _searchList.value = it
+                    if (it.isEmpty()){ // 검색결과 없을시.
+                        nonResult.value = Unit
+                    }else{
+                        _searchList.value = it
+                    }
                 },
                 fail = {
+                    errorToast.value = it
                 })
 
         } else {
@@ -43,9 +50,14 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
     fun requestAddItem(searchStartIndex: Int) {
         RepoInterface.getGifSearch(API_KEY, inputKeyword, searchStartIndex,
             success = {
-                _addList.value = it
+                if (it.isEmpty()){
+                    nonResult.value = Unit
+                }else{
+                    _addList.value = it
+                }
             },
             fail = {
+                errorToast.value = it
             })
 
 

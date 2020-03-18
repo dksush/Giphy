@@ -6,4 +6,6 @@
     <string name="btn_home_search">Search</string>
 
     <string name="blank_search_text">검색어를 입력해 주세요.</string>
+    <string name="server_not_respond_text">잠시 후 다시 시도해 주세요.</string>
+    <string name="non_result_text">검색 결과가 없습니다.</string>
 </resources>
