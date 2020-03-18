@@ -1,5 +1,6 @@
 package com.example.giphy.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.giphy.data.model.SearchResponse
 
 interface GiphyRepositoryInterface {
@@ -20,10 +21,7 @@ interface GiphyRepositoryInterface {
 
     )
 
-
-    suspend fun getLikedItem(): MutableList<String>
-
-
+    fun getLikedItem(): LiveData<MutableList<String>>
     fun saveLikedItem(likedItem_id: SearchResponse)
     fun deleteLikedItem(id: String)
 

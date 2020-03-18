@@ -1,5 +1,6 @@
 package com.example.giphy.di
 
+import com.example.giphy.MainViewModel
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.ui.detail.GifDetailViewModel
 import com.example.giphy.ui.favorite.FavoriteViewModel
@@ -19,6 +20,7 @@ val viewModelModule = module {
     viewModel {
         FavoriteViewModel(get())
     }
-
-
+    viewModel {
+        MainViewModel(get())
+    }
 }

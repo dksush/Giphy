@@ -1,15 +1,20 @@
 package com.example.giphy.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.example.giphy.MainViewModel
 import com.example.giphy.R
+import com.example.giphy.common.StringConst
 import com.example.giphy.common.toast
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.FragmentSearchBinding
 import com.example.giphy.ui.base.BaseFragment
 import com.example.giphy.ui.base.BaseRecyclerAdapter.ItemListener
+import com.example.giphy.ui.detail.GifDetailActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,7 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
     private lateinit var searchAdapter: SearchAdapter
+
     private val viewModel: SearchViewModel by viewModel()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private var offset: Int = 0 // 검색 시작 포지션 위치.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,18 +43,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                             viewModel.requestAddItem(offset)
                         }
                     }
+                    override fun itemOnClick(item: SearchResponse) {
+                        item.isLike = viewModel.likedItemInfo.contains(item.id)
+                        Intent(activity, GifDetailActivity::class.java).apply {
+                            putExtra(StringConst.INTENT_KEY_GIF_INFO, item)
+                        }.run { startActivity(this) }
+                    }
                 })
                 adapter = searchAdapter
 
             }
         }
 
-
-        // 로컬 디비에 저장된 좋아요 게시물 id값 호출.
-        lifecycleScope.launch {
-            viewModel.requestLikedItem()
-        }
-
+        // 로컬디비 observe(좋아요 리스트)
+        mainViewModel.likedItemInfo.observe(viewLifecycleOwner, Observer {
+            viewModel.likedItemInfo = it.toHashSet()
+        })
 
         observeListener()
 

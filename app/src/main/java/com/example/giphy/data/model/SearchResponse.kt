@@ -10,6 +10,7 @@ data class SearchResponse(
     @PrimaryKey(autoGenerate = true)
     var index: Long?,
     var id: String,
+    var isLike : Boolean,
 
 
     @Ignore
@@ -20,7 +21,7 @@ data class SearchResponse(
     val images: SearchImage?
 ) : Serializable {
 
-    constructor() : this(null, "", "", "", null)
+    constructor() : this(null, "", false,"", "", null)
 }
 
 

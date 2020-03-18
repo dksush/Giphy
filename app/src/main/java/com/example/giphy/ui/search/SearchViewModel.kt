@@ -3,7 +3,6 @@ package com.example.giphy.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.giphy.common.LikedItemInfo
 import com.example.giphy.common.StringConst.Companion.API_KEY
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.data.repository.GiphyRepositoryInterface
@@ -21,6 +20,9 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
 
     var inputKeyword = ""
     val blankInputText = MutableLiveData<Unit>()
+
+    // 좋아요 리스트.
+    var likedItemInfo = mutableSetOf<String>()
 
 
     fun requestSearch() {
@@ -48,18 +50,4 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
 
 
     }
-
-
-    // 좋아요 누른 아이템 아이디목룍.
-    suspend fun requestLikedItem() {
-        RepoInterface.getLikedItem().let {
-            if (it.isNotEmpty()) {
-                LikedItemInfo.SearchResponse = it.toHashSet()
-            }
-
-        }
-
-    }
-
-
 }

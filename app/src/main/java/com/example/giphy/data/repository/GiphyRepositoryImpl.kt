@@ -1,5 +1,6 @@
 package com.example.giphy.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.giphy.data.datasource.local.GiphyLocalInterface
 import com.example.giphy.data.datasource.remote.GiphyRemoteInterface
 import com.example.giphy.data.model.SearchResponse
@@ -47,7 +48,7 @@ class GiphyRepositoryImpl(
         localInterface.deleteLikedItem(id)
     }
 
-    override suspend fun getLikedItem(): MutableList<String> {
+    override fun getLikedItem(): LiveData<MutableList<String>> {
         return localInterface.getLikedItem()
     }
 

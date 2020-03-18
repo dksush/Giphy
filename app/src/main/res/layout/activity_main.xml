@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.example.giphy.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,6 +12,7 @@ import com.example.giphy.databinding.ActivityMainBinding
 import com.example.giphy.ui.favorite.FavoriteFragment
 import com.example.giphy.ui.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +20,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val pagerAdapter = PagerAdapter(this)
 
+    private val viewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.vm = viewModel
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(
             navigationItemSelectedListener

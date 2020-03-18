@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.giphy.R
-import com.example.giphy.common.LikedItemInfo
 import com.example.giphy.common.StringConst
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.databinding.ActivityGifDetailBinding
@@ -15,7 +14,7 @@ class GifDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGifDetailBinding
 
-    private var searchResponse: SearchResponse? = null
+    private lateinit var searchResponse: SearchResponse
     private val viewModel: GifDetailViewModel by viewModel { parametersOf(searchResponse) }
 
 
@@ -23,18 +22,15 @@ class GifDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         searchResponse =
-            intent.getSerializableExtra(StringConst.INTENT_KEY_GIF_INFO) as SearchResponse?
+            intent.getSerializableExtra(StringConst.INTENT_KEY_GIF_INFO) as SearchResponse
+
+        if (searchResponse.isLike) {
+            viewModel.isLiked = true
+        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gif_detail)
         binding.vm = viewModel
         binding.lifecycleOwner = this@GifDetailActivity
-
-        LikedItemInfo.SearchResponse.let {
-            if (it.contains(searchResponse?.id)) {
-                viewModel.isLiked = true
-            }
-        }
-
 
     }
 }

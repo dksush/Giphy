@@ -3,7 +3,6 @@ package com.example.giphy.ui.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.giphy.common.LikedItemInfo
 import com.example.giphy.common.StringConst
 import com.example.giphy.data.model.SearchResponse
 import com.example.giphy.data.repository.GiphyRepositoryInterface
@@ -14,12 +13,12 @@ class FavoriteViewModel(private val RepoInterface: GiphyRepositoryInterface) : V
     private val _favoriteItem = MutableLiveData<List<SearchResponse>>()
     val favoriteItem: LiveData<List<SearchResponse>> get() = _favoriteItem
 
-    val nonItem = MutableLiveData<Unit>()
+    var likedItemInfo = mutableSetOf<String>()
 
     fun getFavoriteItem() {
 
-        if (LikedItemInfo.SearchResponse.size > 0) {
-            val text = LikedItemInfo.SearchResponse.toString().run {
+        if (likedItemInfo.size > 0) {
+            val text = likedItemInfo.toString().run {
                 this.substring(1, this.length - 1)
             }
 
