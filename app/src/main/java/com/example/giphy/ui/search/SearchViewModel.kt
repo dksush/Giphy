@@ -40,8 +40,8 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
 
     }
 
-    fun requestAddItem(offset: Int) {
-        RepoInterface.getGifSearch(API_KEY, inputKeyword, offset,
+    fun requestAddItem(searchStartIndex: Int) {
+        RepoInterface.getGifSearch(API_KEY, inputKeyword, searchStartIndex,
             success = {
                 _addList.value = it
             },

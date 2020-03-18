@@ -12,6 +12,7 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
     ListAdapter<T, H>(diffCallback) {
 
     private val itemList: MutableList<T> = mutableListOf()
+    private val newItemList: MutableList<T> = mutableListOf()
 
     override fun onBindViewHolder(holder: H, position: Int) {
         holder.bind(itemList[position])
@@ -28,9 +29,13 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
     open fun setData(items: List<T>) {
         this.itemList.clear()
-        this.itemList.addAll(items)
-        //submitList(items)
         notifyDataSetChanged()
+        this.itemList.addAll(items)
+        //notifyItemRangeInserted(0, items.size)
+        submitList(items)
+
+
+
 
     }
 
