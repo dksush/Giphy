@@ -39,8 +39,9 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.menu.getItem(position).isChecked = true
                 }
             })
+            // 손가락 스와이핑막기.
+            isUserInputEnabled = false
         }
-
 
     }
 
@@ -62,7 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun setPageWithIndex(index: Int) {
-        binding.viewPager.currentItem = index
+        // setCurrentItem(index) -> setCurrentItem(index, false) : smooth scroll 없애기
+        binding.viewPager.setCurrentItem(index, false)
     }
 
     inner class PagerAdapter(fragmentActivity: FragmentActivity) :
