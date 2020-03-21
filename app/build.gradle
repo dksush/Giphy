@@ -75,12 +75,11 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.4"
     kapt "androidx.room:room-compiler:2.2.4"
 
+    // 프래그먼트에서 액티비티 뷰모델 참조하기
     implementation "androidx.fragment:fragment-ktx:1.2.2"
 
-
-
-
-
+    // 통신 로그
+    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
 
 
 }

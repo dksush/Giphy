@@ -2,36 +2,23 @@ package com.example.giphy.apis
 
 
 import com.example.giphy.apis.Api.Companion.BASE_URL
-import okhttp3.Dns
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.io.IOException
-import java.net.UnknownHostException
+
 
 object NetworkUtil {
-    private val SAFE_DNS: Dns by lazy {
-        Dns { hostname ->
-            try {
-                return@Dns Dns.SYSTEM.lookup(hostname)
-            } catch (e: IllegalArgumentException) {
-                // Hack. See https://github.com/square/okhttp/issues/3345
-                throw UnknownHostException(e.message)
-            } catch (e: NullPointerException) {
-                // Hack. See https://github.com/square/okhttp/issues/3345
-                throw UnknownHostException(e.message)
-            } catch (e: Exception) {
-                // Hack. See https://github.com/square/okhttp/issues/3345
-                throw UnknownHostException(e.message)
-            }
-        }
-    }
     private val okHttpClient: OkHttpClient by lazy {
+
+        // 통신로그
+        val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
         OkHttpClient.Builder()
-            .dns(SAFE_DNS)
+            .addInterceptor(logging)
             .addInterceptor(AppInterceptor())
             .build()
     }
@@ -46,7 +33,6 @@ object NetworkUtil {
                 .addConverterFactory(GsonConverterFactory.create())
                 //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-
 
         } catch (e: Exception) {
             e.printStackTrace()
