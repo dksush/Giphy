@@ -11,42 +11,21 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 ) :
     ListAdapter<T, H>(diffCallback) {
 
-    private val itemList: MutableList<T> = mutableListOf()
-    private val newItemList: MutableList<T> = mutableListOf()
-
     override fun onBindViewHolder(holder: H, position: Int) {
-        holder.bind(itemList[position])
+        holder.bind(getItem(position))
         if (position == itemCount - 1 && itemCount >= 10)
             itemListener.loadMoreItems(
                 currentList, itemCount
             )
     }
 
-
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
-
     open fun setData(items: List<T>) {
-        this.itemList.clear()
-        notifyDataSetChanged()
-        this.itemList.addAll(items)
-        //notifyItemRangeInserted(0, items.size)
         submitList(items)
-
-
-
-
-    }
-
-    open fun setAddData(items: List<T>) {
-        this.itemList.addAll(items)
-        notifyDataSetChanged()
     }
 
     open fun clearData() {
-        this.itemList.clear()
-        notifyDataSetChanged()
+        currentList.clear()
+        submitList(null)
     }
 
     open fun getScaleSizeHeight(

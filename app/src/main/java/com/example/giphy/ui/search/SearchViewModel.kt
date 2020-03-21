@@ -14,10 +14,6 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
     private val _searchList = MutableLiveData<List<SearchResponse>>()
     val searchList: LiveData<List<SearchResponse>> get() = _searchList
 
-    // 페이징 리스트
-    private val _addList = MutableLiveData<List<SearchResponse>>()
-    val addList: LiveData<List<SearchResponse>> get() = _addList
-
     var inputKeyword = ""
     val blankInputText = MutableLiveData<Unit>()
     val errorToast = MutableLiveData<Throwable>()
@@ -50,10 +46,12 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
     fun requestAddItem(searchStartIndex: Int) {
         RepoInterface.getGifSearch(API_KEY, inputKeyword, searchStartIndex,
             success = {
-                if (it.isEmpty()){
+                if (it.isEmpty()) {
                     nonResult.value = Unit
-                }else{
-                    _addList.value = it
+                } else {
+                    _searchList.value = _searchList.value?.toMutableList()?.apply {
+                        addAll(it)
+                    }
                 }
             },
             fail = {
