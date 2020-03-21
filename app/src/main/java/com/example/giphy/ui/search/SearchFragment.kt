@@ -3,6 +3,7 @@ package com.example.giphy.ui.search
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -59,6 +60,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         mainViewModel.likedItemInfo.observe(viewLifecycleOwner, Observer {
             viewModel.likedItemInfo = it.toHashSet()
         })
+
+        // 키보드 엔터 변경.
+        binding.editText.setOnEditorActionListener { v, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                viewModel.requestSearch()
+                true
+            } else {
+                false
+            }
+        }
 
         observeListener()
 
