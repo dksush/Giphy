@@ -1,12 +1,14 @@
 package com.example.giphy.data.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class ImgOriginResponse (
+@Parcelize
+data class ImgOriginResponse(
 
     val url: String,
     val webp: String,
     val height: Int,
     val width: Int,
     val mp4 :String
-) :Serializable
+) : Parcelable

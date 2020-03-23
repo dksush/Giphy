@@ -22,7 +22,7 @@ class GifDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         searchResponse =
-            intent.getSerializableExtra(StringConst.INTENT_KEY_GIF_INFO) as SearchResponse
+            intent.getParcelableExtra(StringConst.INTENT_KEY_GIF_INFO) as SearchResponse
 
         if (searchResponse.isLike) {
             viewModel.isLiked = true

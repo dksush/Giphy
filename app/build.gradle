@@ -51,6 +51,8 @@ dependencies {
     // 레트로핏 : 서버통신
     implementation 'com.squareup.retrofit2:retrofit:2.7.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    // 통신 로그
+    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
 
     // glide : 이미지
     implementation 'com.github.bumptech.glide:glide:4.10.0'
@@ -71,15 +73,12 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
     
     // room : 로컬디비 사용.
-    implementation "androidx.room:room-runtime:2.2.4"
-    implementation "androidx.room:room-ktx:2.2.4"
-    kapt "androidx.room:room-compiler:2.2.4"
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
 
     // 프래그먼트에서 액티비티 뷰모델 참조하기
-    implementation "androidx.fragment:fragment-ktx:1.2.2"
-
-    // 통신 로그
-    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
+    implementation "androidx.fragment:fragment-ktx:1.2.3"
 
 
 }
