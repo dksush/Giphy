@@ -15,7 +15,7 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
         holder.bind(getItem(position))
         if (position == itemCount - 1 && itemCount >= 10)
             itemListener.loadMoreItems(
-                currentList, itemCount
+                itemCount
             )
     }
 
@@ -39,7 +39,7 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
 
 
     interface ItemListener<T> {
-        fun loadMoreItems(list: List<T>, itemCount: Int)
+        fun loadMoreItems(itemCount: Int)
         fun itemOnClick(item: T)
     }
 }

@@ -33,7 +33,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
 
             recycle.run {
                 favoriteAdapter = FavoriteAdapter(context, object : ItemListener<SearchResponse> {
-                    override fun loadMoreItems(list: List<SearchResponse>, index: Int) {
+                    override fun loadMoreItems(index: Int) {
                     }
 
                     override fun itemOnClick(item: SearchResponse) {

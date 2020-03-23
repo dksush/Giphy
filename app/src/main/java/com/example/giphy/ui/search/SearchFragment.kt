@@ -38,7 +38,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
             recycle.run {
                 searchAdapter = SearchAdapter(context, object : ItemListener<SearchResponse> {
-                    override fun loadMoreItems(list: List<SearchResponse>, itemCount: Int) {
+                    override fun loadMoreItems(itemCount: Int) {
                         searchStartIndex = itemCount
                         lifecycleScope.launch {
                             viewModel.requestAddItem(searchStartIndex)
