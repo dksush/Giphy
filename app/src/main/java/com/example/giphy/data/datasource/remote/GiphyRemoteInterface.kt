@@ -4,13 +4,11 @@ import com.example.giphy.data.model.SearchResponse
 
 interface GiphyRemoteInterface {
 
-    fun getGifSearch(
+    suspend fun getGifSearch(
         api_key: String,
         q : String,
-        offset: Int,
-        success: (result: List<SearchResponse>) -> Unit,
-        fail: (Throwable) -> Unit
-    )
+        offset: Int
+    ): List<SearchResponse>
 
     fun getFavoriteItem(
         api_key: String,

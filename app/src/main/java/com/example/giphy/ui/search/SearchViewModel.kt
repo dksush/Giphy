@@ -23,19 +23,18 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
     var likedItemInfo = mutableSetOf<String>()
 
 
-    fun requestSearch() {
+    suspend fun requestSearch() {
         if (inputKeyword.isNotBlank() && inputKeyword.isNotEmpty()) {
-            RepoInterface.getGifSearch(API_KEY, inputKeyword, 0,
-                success = {
-                    if (it.isEmpty()){ // 검색결과 없을시.
-                        nonResult.value = Unit
-                    }else{
-                        _searchList.value = it
-                    }
-                },
-                fail = {
-                    errorToast.value = it
-                })
+            try {
+                val result = RepoInterface.getGifSearch(API_KEY, inputKeyword, 0)
+                if (result.isEmpty()) {
+                    nonResult.value = Unit
+                } else {
+                    _searchList.value = result
+                }
+            } catch (e: Exception) {
+                errorToast.value = e
+            }
 
         } else {
             blankInputText.value = Unit
@@ -43,20 +42,20 @@ class SearchViewModel(private val RepoInterface: GiphyRepositoryInterface) : Vie
 
     }
 
-    fun requestAddItem(searchStartIndex: Int) {
-        RepoInterface.getGifSearch(API_KEY, inputKeyword, searchStartIndex,
-            success = {
-                if (it.isEmpty()) {
-                    nonResult.value = Unit
-                } else {
-                    _searchList.value = _searchList.value?.toMutableList()?.apply {
-                        addAll(it)
-                    }
+    suspend fun requestAddItem(searchStartIndex: Int) {
+        try {
+            val result = RepoInterface.getGifSearch(API_KEY, inputKeyword, searchStartIndex)
+            if (result.isEmpty()) {
+                nonResult.value = Unit
+            } else {
+                _searchList.value = _searchList.value?.toMutableList()?.apply {
+                    addAll(result)
                 }
-            },
-            fail = {
-                errorToast.value = it
-            })
+            }
+
+        } catch (e: Exception) {
+            errorToast.value = e
+        }
 
 
     }

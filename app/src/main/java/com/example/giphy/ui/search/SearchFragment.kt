@@ -63,8 +63,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         // 키보드 엔터 변경.
         binding.editText.setOnEditorActionListener { v, actionId, event ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                viewModel.requestSearch()
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                lifecycleScope.launch {
+                    viewModel.requestSearch()
+                }
                 true
             } else {
                 false
@@ -76,6 +78,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     fun onBtnSearch() {
+        // lifecycleScope 의 컨텍스트가(서치프래그) 가 destroy 될 때, 자동으로 해당 블ㄹ럭안의 코드를 취소한다.
+        // 다만 UI 스레드에서 하는게 아니라면 100퍼센트 보장이 되진 않는다.
         lifecycleScope.launch {
             viewModel.requestSearch()
 

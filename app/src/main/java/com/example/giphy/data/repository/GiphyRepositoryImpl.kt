@@ -10,20 +10,12 @@ class GiphyRepositoryImpl(
     private val localInterface: GiphyLocalInterface
 ) : GiphyRepositoryInterface {
 
-
-    override fun getGifSearch(
+    override suspend fun getGifSearch(
         api_key: String,
         q: String,
-        offset: Int,
-        success: (result: List<SearchResponse>) -> Unit,
-        fail: (Throwable) -> Unit
-    ) {
-        remoteInterface.getGifSearch(
-            api_key, q, offset,
-            success,
-            fail
-        )
-
+        offset: Int
+    ): List<SearchResponse> {
+        return remoteInterface.getGifSearch(api_key, q, offset)
     }
 
     override fun getFavoriteItem(
