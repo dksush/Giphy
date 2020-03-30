@@ -15,9 +15,14 @@ class GiphyRemoteImpl : GiphyRemoteInterface {
         q: String,
         offset: Int
     ): List<SearchResponse> {
-        val result = withContext(Dispatchers.IO) { // 굳이 withContext(Dispatchers.IO) 로 안해도 되긴 한다.
+        // 굳이 withContext(Dispatchers.IO) 로 안해도 되긴 한다.
+        // withContext : 코루틴 스코프는 유지한테 스레드만 전환
+        val result = withContext(Dispatchers.IO) {
             NetworkUtil.apiService.getRequestSearch(api_key, q, offset)
         }
+        // Response.code 나 에러 메세지 핸들링 가능
+        // api 에 Response 가 선언되어 있어야함. 없으면 통신은 되나 Response.code 확인과 에러가 내려오는 부분을 핸들링 할 순 없다.
+
         return result.body()?.data!!
     }
 
