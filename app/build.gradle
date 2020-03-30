@@ -73,7 +73,7 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
     
     // room : 로컬디비 사용.
-    implementation "androidx.room:room-runtime:2.2.5"
+    //implementation "androidx.room:room-runtime:2.2.5" room-ktx 에 포함되어 있음.
     implementation "androidx.room:room-ktx:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
 
