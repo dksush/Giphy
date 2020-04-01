@@ -19,16 +19,16 @@ abstract class BaseRecyclerAdapter<T, H : BaseViewHolder<T>>(
             )
     }
 
-    open fun setData(items: List<T>) {
+    fun setData(items: List<T>) {
         submitList(items)
     }
 
-    open fun clearData() {
+    fun clearData() {
         currentList.clear()
         submitList(null)
     }
 
-    open fun getScaleSizeHeight(
+    fun getScaleSizeHeight(
         //  context: Context?,
         width: Int,
         height: Int,
